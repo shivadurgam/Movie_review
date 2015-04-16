@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   
 
 
-  post '/rate' => 'rater#create', :as => 'rate'
   get 'galilean_moon/main'
 
   devise_for :users
