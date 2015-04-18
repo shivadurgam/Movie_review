@@ -48,5 +48,4 @@ gem 'paperclip', '~> 4.2.1'
 gem 'rmagick', '~> 2.14.0'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'bootstrap_form'
-gem 'ratyrate'
 

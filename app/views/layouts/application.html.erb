@@ -13,10 +13,12 @@
 
 
 <div class="container">
-	<% flash.each do |key, value| %>
-	        <div class="flash_<%=key %>">
-	            <%= value %>
-	        </div>
+	
+	<% if notice %>
+	  <p class="alert alert-success"><%= notice %></p>
+	<% end %>
+	<% if alert %>
+	  <p class="alert alert-danger"><%= alert %></p>
 	<% end %>
 	<%= yield %>
 </div>
