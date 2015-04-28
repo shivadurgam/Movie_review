@@ -97,6 +97,6 @@ class MoviesController < ApplicationController
     end
 
     def admin_user
-      redirect_to movies_path, notice: "You have no admin rights!!" unless (current_user==User.first)
+      redirect_to movies_path, notice: "You have no admin rights!!" unless (current_user.email == "shivakrishnadurgam@gmail.com")
     end
 end
