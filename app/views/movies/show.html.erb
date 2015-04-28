@@ -26,7 +26,9 @@
         </tr>
         <tr>
           <td><strong>Rating:</strong></td>
-          <td><%= @movie.rating %></td>
+          <td>
+            <%= number_with_precision(@current_movie_rating.to_f, :precision => 2) %>/5 &nbsp[<%= @reviews.count %> ratings]
+          </td>
         </tr>
         </tbody>
         </table>
@@ -45,13 +47,13 @@
 
                   <% if @movie.reviews.any? %>
                       <div class="reviews">
-                      <ul>
+                      <ul class="inline">
                       <% @movie.reviews.each do |review|%>
                         
-                        <li><%= review.rating %> <%= review.comment %> <i>by <%= review.user.email %></i>
-                        <% if review.user == current_user %>
+                        <li><p class="badge"><%= review.rating %></p> <%= review.comment %> <i style="float:right">by <small><%= review.user.email %></small>
+                        <% if review.user == current_user %> &nbsp &nbsp
                          <%= link_to 'Delete', [review.movie, review], method: :delete, confirm: {data: "are you sure?"} %> 
-                        <% end %></li>
+                        <% end %></i></li>
                       <% end %>
                       </ul>
                       </div>

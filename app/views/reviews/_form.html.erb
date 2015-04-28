@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.number_field :rating %>
+    <%= f.number_field :rating, within: 1...6 %>
   </div>
   <div class="field">
     <%= f.text_area :comment %>

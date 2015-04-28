@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :admin_user, only: [:new, :edit, :destroy]
 
 
   # GET /movies
@@ -22,6 +23,16 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @review = Review.new
+    @reviews = @movie.reviews.all
+    @sum = 0
+    if @reviews.count == 0
+      @current_movie_rating = 0
+    else
+      for i in 0..(@reviews.count-1)
+        @sum = @sum + @reviews[i].rating
+      end
+      @current_movie_rating = (@sum.to_f/(@reviews.count))      
+    end 
   end
 
   # GET /movies/new
@@ -83,5 +94,9 @@ class MoviesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :image)
+    end
+
+    def admin_user
+      redirect_to movies_path, notice: "You have no admin rights!!" unless (current_user==User.first)
     end
 end
